@@ -15,7 +15,7 @@
                         <div class="card mb-3 p-5" style="background-color: rgb(255, 22, 22);">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img :src="book[0].bookImage" class="img-fluid rounded-start" alt="book name">
+                                    <img :src="book[0].bookImage" class="img-fluid rounded-start" alt="...">
                                 </div>
                                 <div class="col-md-8 ">
                                     <div class="card-body ms-5 ps-5 ">
@@ -41,24 +41,26 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="hasToken" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <!-- v-if="hasToken" -->
+                    <div  class="modal fade has-login" style="display: none;" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Added successfuly</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">                    
+                            <div class="modal-body">         
                                 The book has been added to the cart successfuly
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <router-link to="/shoppingCart" class="btn btn-primary">See shopping cart</router-link>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="pushToShoppingCart" >shopping cart</button>
                             </div>
                             </div>
                         </div>
                     </div>
-                    <div v-else class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <!-- v-else -->
+                    <div  class="modal fade" style="display: none;" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                             <div class="modal-header">
@@ -70,7 +72,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <router-link to="/login" class="btn btn-primary">Login</router-link>
+                                <button @click="pushToLogin" type="button" class="btn btn-primary"  data-bs-dismiss="modal">Login</button>
                             </div>
                             </div>
                         </div>
@@ -97,7 +99,7 @@
 import Header from "../components/header.vue"
 import Footer from "../components/footer.vue"
 import { computed , ref , watch } from "vue";
-import { useRoute } from "vue-router";
+import { useRouter , useRoute } from "vue-router";
 import { allBooks } from "../stores/counter.js"
 const books = allBooks()
 import { allUsers } from "../stores/counter.js";
@@ -111,6 +113,7 @@ export default {
     setup(){
         const showSearch = false 
         const route = useRoute()
+        const router = useRouter()
         const book = ref("")
         const genre = ref("")
         const allBooks = computed( () => books )
@@ -144,9 +147,17 @@ export default {
         };
         findBook()
         function addBook(){
+            document.querySelector(".has-login").style.display="block"
             users.addBookToCart(book.value[0])
+            document.querySelector(".has-login").style.display="none"
         }
-        return{ showSearch , route , findBook , allBooks , book , name , genre , hasToken , addBook , Param}
+        function pushToShoppingCart (){
+            router.push("/shoppingCart")
+        }
+        function pushToLogin (){
+            router.push("/shoppingCart")
+        }
+        return{ showSearch , router , findBook , allBooks , book , name , genre , hasToken , addBook , Param , pushToShoppingCart , pushToLogin }
     }
 }
 </script>

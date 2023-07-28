@@ -3,6 +3,8 @@ import { defineStore } from 'pinia'
 export const allUsers = defineStore('user', {
   state : () =>{
     return{
+      totalPrice : "" ,
+      initialValue : 0 ,
       isValid : "" ,
       currentUser : "" ,
       cart : localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [] ,
@@ -96,26 +98,30 @@ export const allUsers = defineStore('user', {
           this.cart.push({...bookDetail,quantity: 1,id: this.cart.length+1})
         }else{ item.quantity++}
         localStorage.setItem("cart", JSON.stringify(this.cart));
+        this.getTotalPrice()
       },
       // shopping-card
       decreaseBookFromCart(bookDetail){
         // const item = this.cart.find( book => book.bookName == bookDetail.bookName)
         if (bookDetail.quantity > 1) {
-          this.cart[bookDetail.id-1].quantity--
-        }else if (bookDetail.quantity <= 1){
-          this.cart.splice([bookDetail.id-1] , 1)
+          let index = this.cart.findIndex( (el) => el.bookName == bookDetail.bookName )
+          this.cart[index].quantity--
+          localStorage.setItem("cart", JSON.stringify(this.cart));
+          this.getTotalPrice()
         }
-        localStorage.setItem("cart", JSON.stringify(this.cart));
       },
       // shopping-card
       removeBookFromCart(bookDetail){
-        if(this.cart.length > 1){
-          this.cart.splice([bookDetail.id-1] , 1)
-          localStorage.setItem("cart", JSON.stringify(this.cart));
-        }else{
-          this.cart.pop()
-          localStorage.setItem("cart", JSON.stringify(this.cart));
-        }
+        let index = this.cart.findIndex( (el) => el.bookName == bookDetail.bookName )
+        this.cart.splice(index , 1)
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+        this.getTotalPrice()
+      },
+      // shopping-card
+      getTotalPrice(){
+        this.totalPrice = this.cart.reduce((total, item) => {
+          return total + Number(item.bookPrice*item.quantity)
+      },this.initialValue)
       },
   }
 });
@@ -453,13 +459,6 @@ export const allBooks = defineStore('book', {
           discription : "This book is the antidote to the “sink or swim” approach that sabotages too many aspiring sales professionals."
           },
           {
-          bookImage : new URL("@/assets/img/Scientific/Breathing Space.jpg" , import.meta.url).href,
-          bookName : "Breathing space" ,
-          bookWriter : "John G. Eliason" ,
-          bookPrice : "30" ,
-          discription : "A quick, interactive guide helped them understand their design style and captured exactly what they needed in their book cover."
-          },
-          {
           bookImage : new URL("@/assets/img/Robert greene/Power.jpg" , import.meta.url).href,
           bookName : "Power" ,
           bookWriter : "Robert greene" ,
@@ -690,7 +689,7 @@ export const allBooks = defineStore('book', {
         ],
         sliderBooks : [
           {
-          imageSrc : new URL("@/assets/img/slider/slider-camus 1.jpg" , import.meta.url).href,
+          imageSrc : new URL("@/assets/img/slider/slider-camus.jpg" , import.meta.url).href,
           title : "Albert Camus" ,
           discription : "Best of Albert Camus books."
           },

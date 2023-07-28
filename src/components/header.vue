@@ -75,13 +75,13 @@ export default {
         let findedBook = ""
         function searchBook(){
             if(searchValue.value){
-                findedBook = books.novelBooks.filter((el)=>el.bookName == searchValue.value)
+                findedBook = books.novelBooks.filter((el)=>el.bookName.toLocaleLowerCase() == searchValue.value.toLocaleLowerCase())
                 if(findedBook == ""){
-                    findedBook = books.historyBooks.filter((el)=>el.bookName == searchValue.value)
+                    findedBook = books.historyBooks.filter((el)=>el.bookName.toLocaleLowerCase() == searchValue.value.toLocaleLowerCase())
                     if (findedBook == "") {
-                        findedBook = books.horrorBooks.filter((el)=>el.bookName == searchValue.value)
+                        findedBook = books.horrorBooks.filter((el)=>el.bookName.toLocaleLowerCase() == searchValue.value.toLocaleLowerCase())
                         if (findedBook == "") {
-                            findedBook = books.scientificBook.filter((el)=>el.bookName == searchValue.value)
+                            findedBook = books.scientificBook.filter((el)=>el.bookName.toLocaleLowerCase() == searchValue.value.toLocaleLowerCase())
                         }
                     }
                 }

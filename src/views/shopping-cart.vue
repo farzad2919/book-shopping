@@ -28,7 +28,7 @@
                     <div class="row bg-light p-3" style="border-radius: 8px;">
                         <div class="col-8">
                             <p class="fs-4 fs-sm-3">your credit : <span class="fs-4 fs-sm-2"> {{ user.credit }}$ </span> </p>
-                            <p class="fs-4 fs-sm-3" >total price : <span class="fs-4 fs-sm-2"> {{ totalPrice }} </span> </p>
+                            <p class="fs-4 fs-sm-3" >total price : <span class="fs-4 fs-sm-2"> {{ allUsrs.totalPrice }}$ </span> </p>
                         </div>
                         <div class="col-3 col-lg-2">
                             <button type="button" class="btn btn-danger mb-4 py-1 px-3 py-sm-2 px-sm-4">Increase</button>
@@ -66,14 +66,12 @@ export default {
     setup(){
         const allUsrs = computed( () => users )
         const user = JSON.parse(localStorage.getItem("activeUser"))
-        const initialValue = 0
         const showSearch = true
-        const totalPrice = users.cart.reduce((total, item) => {
-                return total + Number(item.bookPrice*item.quantity)
-            },initialValue)
-
-        watch(totalPrice , () => totalPrice)
-        return{ allUsrs , user , totalPrice , initialValue , showSearch }
+        function totalPriceCart() {
+            users.getTotalPrice()
+        }
+        totalPriceCart()
+        return{ allUsrs , user , showSearch , totalPriceCart }
     }
 }
 </script>

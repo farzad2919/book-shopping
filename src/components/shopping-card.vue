@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="card mb-3 p-3" >
-      <div class="row g-0">
+      <div class="row g-0" style="min-height: 250px;">
         <!-- book image -->
         <div class="col-md-4" @click="showBook(bookData)" style="cursor: pointer;">
           <img :src="bookData.bookImage" class="img-fluid rounded-start" alt="...">
@@ -22,8 +22,8 @@
                 <i class="bi bi-caret-down-fill" style="cursor: pointer;" @click="decreaseQuantity(bookData)"></i>
               </div>
             </div>
+            <button type="button" class="btn btn-outline-light dropdown-toggle-split rounded-circle text-danger mt-3" @click="removeBook(bookData)" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-trash fs-6"></i></button>
           </div>
-          <button type="button" class="btn btn-outline-light dropdown-toggle-split rounded-circle text-danger" @click="removeBook(bookData)" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-trash fs-6"></i></button>
         </div>
       </div>
     </div>
@@ -43,10 +43,10 @@ export default {
     setup(){
         const router = useRouter();
         const localStorageCart = JSON.parse(localStorage.getItem("cart"))
+        
         function showBook(bookData){
             router.push(`/home/:${bookData.bookName}`)
         }
-
         function increaseQuantity(bookData) {
           users.addBookToCart(bookData)
         }

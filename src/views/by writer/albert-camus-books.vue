@@ -13,7 +13,7 @@
             <section>
                 <div class="container">
                     <div class="row position-relative">
-                        <img src="@/assets/img/slider/slider-camus 2.jpg" alt="Hermann Hesse" class="img-fluid w-100 mb-3" width="100">
+                        <img src="@/assets/img/slider/slider-camus.jpg" alt="Albert camus" class="img-fluid w-100 mb-3" width="100">
                         <!-- <p class="image-text">History Books</p> -->
                         <h3 class="mt-5">Albert Camus:</h3>
                         <p class="fs-5" align="justify"> Hermann Karl Hesse was a German-Swiss poet, novelist, and painter. His best-known works include Demian, Steppenwolf, Siddhartha, 

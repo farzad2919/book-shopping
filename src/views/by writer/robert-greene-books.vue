@@ -13,7 +13,7 @@
             <section>
                 <div class="container">
                     <div class="row position-relative">
-                        <img src="@/assets/img/slider/Slider-robert greene.jpg" alt="Hermann Hesse" class="img-fluid w-100 mb-3" width="100">
+                        <img src="@/assets/img/slider/Slider-robert greene.jpg" alt="Robert greene" class="img-fluid w-100 mb-3" width="100">
                         <!-- <p class="image-text">History Books</p> -->
                         <h3 class="mt-5">Robert Greene:</h3>
                         <p class="fs-5" align="justify">Robert Greene is an American author of books on strategy, power, and seduction.He has written six international bestsellers, including The 48 Laws of Power, The Art of Seduction, The 33 Strategies of War, 

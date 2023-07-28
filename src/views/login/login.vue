@@ -34,7 +34,7 @@
                             <div class="row justify-content-between">
                                 <div class="col-8 form-check">
                                     <input class="form-check-input" type="checkbox" value="terms" id="flexCheckIndeterminate" required>
-                                    <label class="form-check-label" for="flexCheckIndeterminate">Agree to terms and conditions</label>
+                                    <label class="form-check-label" for="flexCheckIndeterminate">Keep me login</label>
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">You must agree before submitting.</div>
                                 </div>
